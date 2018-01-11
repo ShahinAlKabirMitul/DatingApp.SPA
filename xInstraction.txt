@@ -1,0 +1,4 @@
+Install bootstrap and  font-awesome
+
+npm install bootstrap@3.3.7  font-awesome --save
+
