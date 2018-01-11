@@ -2,3 +2,9 @@ Install bootstrap and  font-awesome
 
 npm install bootstrap@3.3.7  font-awesome --save
 
+Add boostrap & Font awesome in angular.cli json 
+
+"../node_modules/bootstrap/dist/css/bootstrap.min.css",
+ "../node_modules/font-awesome/css/font-awesome.css",
+
+
