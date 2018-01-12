@@ -11,15 +11,22 @@ userToken: any;
 constructor(private http: Http) { }
 
 login(model: any) {
-const header = new Headers({'content-type': 'application/json'});
-const options = new RequestOptions({headers: header});
- return this.http.post(this.baseurl + 'login', model, options).map( (response: Response) => {
+ return this.http.post(this.baseurl + 'login', model, this.requestOptions()).map( (response: Response) => {
     const user = response.json();
     if (user) {
         localStorage.setItem('token', user.tokenString );
         this.userToken = user.tokenString;
     }
  } );
+}
+
+register(model: any) {
+ return this.http.post(this.baseurl + 'register', model, this.requestOptions());
+}
+
+private requestOptions(){
+    const header = new Headers({'content-type': 'application/json'});
+    return new RequestOptions({headers: header});
 }
 }
 
