@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AlertifyService } from './_services/Alertfy.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-
+  constructor(private al: AlertifyService){
+  //this.al.alert('Ready!');
+  }
 }

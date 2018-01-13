@@ -2,6 +2,7 @@
 import { AuthService } from './../_services/auth.service';
 
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { AlertifyService } from '../_services/Alertfy.service';
 
 
 
@@ -13,23 +14,23 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class RegisterComponent implements OnInit {
   @Output()cancelRegister = new EventEmitter();
   model: any = {};
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
 
   register() {
     this.authService.register(this.model).subscribe( () => {
-      console.log('Registration Sucessfully');
+      this.alertify.success('Registration Sucessfully');
     // tslint:disable-next-line:no-shadowed-variable
     }, error => {
-      console.log(error);
+      this.alertify.error(error);
     });
   }
 
   cancel() {
     this.cancelRegister.emit(false);
-    console.log('cancelled');
+    this.alertify.message('cancelled');
   }
 
 }
