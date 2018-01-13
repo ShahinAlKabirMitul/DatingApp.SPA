@@ -1,6 +1,5 @@
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { error } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-nav',
@@ -15,10 +14,10 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
   login() {
-    this.authService.login(this.model).subscribe( data => {
+    this.authService.login(this.model).subscribe( () => {
       console.log('login succeessfully');
     }, error => {
-      console.log('login Fail');
+      console.log(error);
     } );
   }
 

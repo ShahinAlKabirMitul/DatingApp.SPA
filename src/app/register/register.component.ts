@@ -1,3 +1,4 @@
+
 import { AuthService } from './../_services/auth.service';
 
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
@@ -18,11 +19,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.model);
     this.authService.register(this.model).subscribe( () => {
       console.log('Registration Sucessfully');
+    // tslint:disable-next-line:no-shadowed-variable
     }, error => {
-      console.log('Registration Fail!!');
+      console.log(error);
     });
   }
 
