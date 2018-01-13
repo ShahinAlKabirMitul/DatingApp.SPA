@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -28,7 +28,7 @@
       <ul *ngIf="loggedIn()" class="nav navbar-nav navbar-right">
        
         <li class="dropdown" dropdown>
-          <a href="#" class="dropdown-toggle" dropdownToggle  >Welcome {{authService.decodeToken?.unique_name | titlecase}} <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" dropdownToggle  >Welcome {{ authService.decodeToken?.unique_name | titlecase}} <span class="caret"></span></a>
           <ul class="dropdown-menu" *dropdownMenu  >
            
             <li><a href="#"> <i class="fa fa-user"></i> Edit Profile</a></li>
