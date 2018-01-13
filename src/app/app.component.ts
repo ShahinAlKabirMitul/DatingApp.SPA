@@ -1,14 +1,22 @@
+import { JwtHelper } from 'angular2-jwt';
+import { AuthService } from './_services/auth.service';
 import { Component } from '@angular/core';
-import { AlertifyService } from './_services/Alertfy.service';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
-  constructor(private al: AlertifyService){
-  //this.al.alert('Ready!');
+  jwtHelper: JwtHelper = new JwtHelper();
+  constructor(private authService: AuthService) {
   }
+ ngOnInit(){
+  const token = localStorage.getItem('token');
+  if (token) {
+    this.authService.decodeToken = this.jwtHelper.decodeToken(token);
+  }
+ }
 }
