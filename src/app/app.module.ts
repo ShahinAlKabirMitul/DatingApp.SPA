@@ -1,3 +1,4 @@
+import { UserService } from './_services/user.service';
 import { AlertifyService } from './_services/Alertfy.service';
 import { AuthService } from './_services/auth.service';
 import { HttpModule } from '@angular/http';
@@ -38,7 +39,8 @@ import { AuthGuard } from './_guards/auth.guard';
   providers: [
     AuthService,
     AlertifyService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
