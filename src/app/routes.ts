@@ -3,7 +3,7 @@ import { ListComponent } from './list/list.component';
 
 import {Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 
 export const appRoutes: Routes = [
