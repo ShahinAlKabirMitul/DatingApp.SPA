@@ -22,7 +22,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import {  AuthModule } from './auth/auth.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
-
+import { NgxGalleryModule } from 'ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -44,6 +44,7 @@ import { MemberListResolver } from './_resolvers/member-list.resolver';
     RouterModule.forRoot(appRoutes),
     AuthModule,
     TabsModule.forRoot(),
+    NgxGalleryModule,
   ],
   providers: [
     AuthService,
