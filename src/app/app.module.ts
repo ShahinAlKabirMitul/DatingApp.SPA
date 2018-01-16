@@ -1,10 +1,12 @@
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { UserService } from './_services/user.service';
 import { AlertifyService } from './_services/Alertfy.service';
 import { AuthService } from './_services/auth.service';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -18,6 +20,8 @@ import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './_guards/auth.guard';
 import { MemberCardComponent } from './members/member-card/member-card.component';
+import {  AuthModule } from './auth/auth.component';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
 
 
 @NgModule({
@@ -29,7 +33,8 @@ import { MemberCardComponent } from './members/member-card/member-card.component
     MemberListComponent,
     ListComponent,
     MessagesComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberDetailComponent
 ],
   imports: [
     BrowserModule,
@@ -37,12 +42,16 @@ import { MemberCardComponent } from './members/member-card/member-card.component
     FormsModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
+    AuthModule,
+    TabsModule.forRoot(),
   ],
   providers: [
     AuthService,
     AlertifyService,
     AuthGuard,
-    UserService
+    UserService,
+    MemberDetailResolver,
+    MemberListResolver
   ],
   bootstrap: [AppComponent]
 })
