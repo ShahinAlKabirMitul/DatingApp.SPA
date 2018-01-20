@@ -27,6 +27,7 @@ import {  AuthModule } from './auth/auth.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
     AuthModule,
     TabsModule.forRoot(),
     NgxGalleryModule,
+    FileUploadModule
   ],
   providers: [
     AuthService,
