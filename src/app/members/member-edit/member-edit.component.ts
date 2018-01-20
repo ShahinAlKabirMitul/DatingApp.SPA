@@ -16,7 +16,7 @@ export class MemberEditComponent implements OnInit {
   user: User;
   @ViewChild('editForm') editForm: NgForm;
   constructor(private route: ActivatedRoute, private alertify: AlertifyService,
-     private userService: UserService,private authService: AuthService) { }
+     private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
