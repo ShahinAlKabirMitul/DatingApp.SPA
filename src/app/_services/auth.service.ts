@@ -43,8 +43,8 @@ constructor(private http: Http) { }
     return tokenNotExpired('token');
   }
 
- register(model: any) {
-   return this.http.post(this.baseurl + 'register', model, this.requestOptions()).catch(this.handleError);
+ register(user: User) {
+   return this.http.post(this.baseurl + 'register', user, this.requestOptions()).catch(this.handleError);
  }
 
  private requestOptions(){

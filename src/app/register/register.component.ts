@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
@@ -17,16 +18,17 @@ export class RegisterComponent implements OnInit {
   @Output()cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   bsConfig: Partial<BsDatepickerConfig>;
-  model: any = {};
+  user: any = {};
   constructor(private authService: AuthService,
     private alertify: AlertifyService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.bsConfig = {
       containerClass: 'theme-red'
-    }
+    };
     this.createRegisterForm();
   }
 
@@ -46,20 +48,25 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  passwordMatchValidor(g: FormGroup){
-    return g.get('password').value === g.get('confirmPassword').value 
-    ? null 
+  passwordMatchValidor(g: FormGroup) {
+    return g.get('password').value === g.get('confirmPassword').value
+    ? null
     : {'mismatch' : true };
   }
 
   register() {
-    console.log('regi value', this.registerForm.value);
-    // this.authService.register(this.model).subscribe( () => {
-    //   this.alertify.success('Registration Sucessfully');
-    // // tslint:disable-next-line:no-shadowed-variable
-    // }, error => {
-    //   this.alertify.error(error);
-    // });
+    if (this.registerForm.value ) {
+      this.user = Object.assign({}, this.registerForm.value);
+      this.authService.register(this.user).subscribe( () => {
+        this.alertify.success('Registration successfull');
+      }, error => {
+        this.alertify.error(error);
+      }, () => {
+        this.authService.login(this.user).subscribe( () => {
+          this.router.navigate(['/members']);
+        } );
+      } );
+    }
   }
 
   cancel() {
