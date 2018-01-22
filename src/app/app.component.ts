@@ -22,7 +22,13 @@ export class AppComponent implements OnInit {
   }
   if (user) {
     this.authService.currentUser = user;
-    this.authService.changeMemberPhoto(user.photoUrl);
+    if (this.authService.currentUser.photoUrl !== null) {
+      this.authService.changeMemberPhoto(user.photoUrl);
+    }
+    // tslint:disable-next-line:one-line
+    else {
+      this.authService.changeMemberPhoto('../../assets/user.png');
+    }
   }
  }
 }

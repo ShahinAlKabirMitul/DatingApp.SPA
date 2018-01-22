@@ -34,7 +34,12 @@ constructor(private http: Http) { }
         console.log(this.decodeToken);
         this.userToken = user.tokenString;
         this.currentUser = user.user;
-        this.changeMemberPhoto(this.currentUser.photoUrl);
+        if (this.currentUser.photoUrl !== null) {
+            this.changeMemberPhoto(this.currentUser.photoUrl);
+        }
+        else {
+            this.changeMemberPhoto('../../assets/user.png');
+        }
      }
    } ).catch(this.handleError);
  }
