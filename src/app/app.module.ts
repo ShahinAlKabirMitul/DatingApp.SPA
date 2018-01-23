@@ -1,3 +1,4 @@
+import { TimeAgoPipe } from 'time-ago-pipe';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsave-changes.guard';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
@@ -41,7 +42,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    TimeAgoPipe,
 ],
   imports: [
     BrowserModule,
@@ -55,6 +57,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     NgxGalleryModule,
     FileUploadModule,
     BsDatepickerModule.forRoot(),
+    
+
   ],
   providers: [
     AuthService,
