@@ -1,3 +1,4 @@
+
 import { PaginatedResult } from './../_models/pagination';
 import { AuthHttp } from 'angular2-jwt';
 import { User } from './../_models/User';
@@ -54,7 +55,14 @@ deletePhoto(userid: number, id: number) {
     return this.authHttp.delete(this.baseUrl + 'users/' + userid + '/photos/' + id , { }).catch(this.handleError);
 }
 
+sendLike(id: number, recipientId: number) {
+    return this.authHttp.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {}).catch(this.handleError);
+}
+
 private handleError( error: any ) {
+    if ( error.status === 400) {
+        return Observable.throw(error._body)
+    }
     const applicationError = error.headers.get('Application-Error');
     if (applicationError) {
         return Observable.throw(applicationError);
