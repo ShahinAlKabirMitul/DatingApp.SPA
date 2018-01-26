@@ -13,12 +13,19 @@ export class UserService {
 baseUrl = environment.apiUrl;
 constructor(private authHttp: AuthHttp) { }
 
-getUsers(page?: number, itemsPerPage?: number) {
+getUsers(page?: number, itemsPerPage?: number, userParams?: any) {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
     let querySting = '?';
     if ( page != null && itemsPerPage != null ) {
-        querySting += 'pageNumber=' + page + '&pageSize=' + itemsPerPage;
+        querySting += 'pageNumber=' + page + '&pageSize=' + itemsPerPage + '&';
     }
+    if( userParams != null) {
+        querySting += 
+        'minAge=' + userParams.minAge +
+        '&maxAge=' + userParams.maxAge +
+        '&gender=' + userParams.gender +
+        '&orderBy=' + userParams.orderBy;
+        }
 
     return this.authHttp.get(this.baseUrl + 'users' + querySting)
            .map( (response: Response)  => {

@@ -14,24 +14,36 @@ import { Pagination } from '../../_models/pagination';
 export class MemberListComponent implements OnInit {
   users: User[];
   pagination: Pagination;
+  user: User = JSON.parse(localStorage.getItem('user'));
+  genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
+  userParams: any = {};
   constructor(private userServicr: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
-
+  
   ngOnInit() {
    this.route.data.subscribe( data => {
-     //console.log(data);
      this.users = data['users'].result;
      this.pagination = data['users'].pagination;
-    // this.pagination.itemPerPage
    } );
+   this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
+   this.userParams.minAge = 19;
+   this.userParams.maxAge = 99;
+   this.userParams.orderBy = 'lastAcive';
   }
   loadUser() {
-    this.userServicr.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage)
+    console.log(this.userParams);
+    this.userServicr.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
         .subscribe( (res: PaginatedResult<User[]> ) => {
           this.users = res.result;
           this.pagination = res.pagination;
         }, error => {
           this.alertify.error(error);
         } );
+  }
+  resetFilters() {
+    this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
+    this.userParams.minAge = 19;
+    this.userParams.maxAge = 99;
+    this.loadUser();
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;

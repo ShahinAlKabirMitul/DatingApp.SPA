@@ -29,6 +29,7 @@ import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ButtonsModule } from 'ngx-bootstrap/buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FileUploadModule,
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
 
   ],
   providers: [
