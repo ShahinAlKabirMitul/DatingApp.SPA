@@ -1,3 +1,4 @@
+import { MessagesResolver } from './_resolvers/message.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
@@ -19,7 +20,7 @@ export const appRoutes: Routes = [
    canActivate: [AuthGuard],
    children: [
     { path: 'members', component: MemberListComponent, resolve: {users: MemberListResolver}},
-    { path: 'messages', component: MessagesComponent},
+    { path: 'messages', component: MessagesComponent, resolve: {messages : MessagesResolver}},
     { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
     {path: 'member/edit', component: MemberEditComponent,
          resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},

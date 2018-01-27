@@ -31,6 +31,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ButtonsModule } from 'ngx-bootstrap/buttons/buttons.module';
+import { MessagesResolver } from './_resolvers/message.resolver';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons/buttons.module';
     MemberListResolver,
     MemberEditResolver,
     PreventUnsavedChanges,
-    ListResolver
+    ListResolver,
+    MessagesResolver
   ],
   bootstrap: [AppComponent]
 })

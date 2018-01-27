@@ -1,3 +1,4 @@
+import { Message } from './../_models/message';
 
 import { PaginatedResult } from './../_models/pagination';
 import { AuthHttp } from 'angular2-jwt';
@@ -9,6 +10,7 @@ import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+
 @Injectable()
 export class UserService {
 baseUrl = environment.apiUrl;
@@ -63,6 +65,22 @@ deletePhoto(userid: number, id: number) {
 
 sendLike(id: number, recipientId: number) {
     return this.authHttp.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {}).catch(this.handleError);
+}
+getMessages(id: number, page?: number, itemPerPage?: number, messageContainer?: string) {
+    const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
+    let querySting = '?MessageContainer=' + messageContainer ;
+    if (page != null && itemPerPage != null ) {
+        querySting += '&pageNumber=' + page + '&pageSize=' + itemPerPage ;
+    }
+
+    return this.authHttp.get(this.baseUrl + 'users/' + id + '/messages' + querySting)
+          .map( (response: Response) => {
+              paginatedResult.result = response.json();
+              if (response.headers.get('Pagination') != null ) {
+                paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+              }
+              return paginatedResult;
+          } ).catch(this.handleError);
 }
 
 private handleError( error: any ) {
