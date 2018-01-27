@@ -17,7 +17,7 @@ export class MemberListComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
   genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
   userParams: any = {};
-  constructor(private userServicr: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
   
   ngOnInit() {
    this.route.data.subscribe( data => {
@@ -30,8 +30,7 @@ export class MemberListComponent implements OnInit {
    this.userParams.orderBy = 'lastAcive';
   }
   loadUser() {
-    console.log(this.userParams);
-    this.userServicr.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
         .subscribe( (res: PaginatedResult<User[]> ) => {
           this.users = res.result;
           this.pagination = res.pagination;

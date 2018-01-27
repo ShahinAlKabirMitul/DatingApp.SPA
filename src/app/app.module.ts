@@ -1,3 +1,4 @@
+import { ListResolver } from './_resolvers/lists.resolver';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsave-changes.guard';
@@ -70,7 +71,8 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons/buttons.module';
     MemberDetailResolver,
     MemberListResolver,
     MemberEditResolver,
-    PreventUnsavedChanges
+    PreventUnsavedChanges,
+    ListResolver
   ],
   bootstrap: [AppComponent]
 })

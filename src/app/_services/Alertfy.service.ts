@@ -29,7 +29,7 @@ warning(message: any) {
 message(message: any) {
     alertify.message(message);
 }
-alert(message : any){
+alert(message: any){
     alert(message);
 }
 
