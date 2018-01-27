@@ -1,3 +1,4 @@
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { ListResolver } from './_resolvers/lists.resolver';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
@@ -47,6 +48,7 @@ import { MessagesResolver } from './_resolvers/message.resolver';
     MemberEditComponent,
     PhotoEditorComponent,
     TimeAgoPipe,
+    MemberMessagesComponent
 ],
   imports: [
     BrowserModule,
