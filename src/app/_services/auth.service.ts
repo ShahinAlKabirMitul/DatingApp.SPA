@@ -37,6 +37,7 @@ constructor(private http: Http) { }
         if (this.currentUser.photoUrl !== null) {
             this.changeMemberPhoto(this.currentUser.photoUrl);
         }
+        // tslint:disable-next-line:one-line
         else {
             this.changeMemberPhoto('../../assets/user.png');
         }
@@ -52,6 +53,7 @@ constructor(private http: Http) { }
    return this.http.post(this.baseurl + 'register', user, this.requestOptions()).catch(this.handleError);
  }
 
+ // tslint:disable-next-line:one-line
  private requestOptions(){
     const header = new Headers({'content-type': 'application/json'});
     return new RequestOptions({headers: header});

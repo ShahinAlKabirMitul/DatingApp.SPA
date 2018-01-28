@@ -35,5 +35,9 @@ export class MessagesComponent implements OnInit {
           this.alertify.error(error);
         } );
   }
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadMessages();
+  }
 
 }

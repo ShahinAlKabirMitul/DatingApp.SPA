@@ -12,9 +12,9 @@ import { AlertifyService } from '../../_services/Alertfy.service';
 export class MemberCardComponent implements OnInit {
   @Input() user: User;
 
-  constructor(private authService : AuthService,
+  constructor(private authService: AuthService,
      private userService: UserService,
-      private alertify : AlertifyService) { }
+      private alertify: AlertifyService) { }
 
   ngOnInit() {
   }

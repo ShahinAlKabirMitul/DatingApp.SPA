@@ -90,7 +90,7 @@ getMessageThread(id: number, recipientId: number) {
 
 private handleError( error: any ) {
     if ( error.status === 400) {
-        return Observable.throw(error._body)
+        return Observable.throw(error._body);
     }
     const applicationError = error.headers.get('Application-Error');
     if (applicationError) {
@@ -108,6 +108,11 @@ private handleError( error: any ) {
     return Observable.throw(
         modelStateError || 'Server Error '
     );
+ }
+ sendMessage(id: number, message: Message) {
+    return this.authHttp.post(this.baseUrl + 'users/' + id + '/messages', message).map( (response: Response) => {
+       return response.json();
+    }).catch(this.handleError);
  }
 
 }
