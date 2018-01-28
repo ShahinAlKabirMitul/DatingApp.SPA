@@ -14,7 +14,8 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsave-changes.guard';
 import { ListResolver } from './_resolvers/lists.resolver';
 
 export const appRoutes: Routes = [
-{  path: 'home', component: HomeComponent },
+{ path: '', redirectTo: 'home', pathMatch: 'full'},
+{ path: 'home', component: HomeComponent},
 {  path: '',
    runGuardsAndResolvers: 'always',
    canActivate: [AuthGuard],
