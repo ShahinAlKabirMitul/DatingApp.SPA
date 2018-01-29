@@ -114,5 +114,10 @@ private handleError( error: any ) {
        return response.json();
     }).catch(this.handleError);
  }
+ deleteMessage(id: number, userid: number)
+ {
+    return this.authHttp.post(this.baseUrl + 'users/' + userid + '/messages/' + id, {})
+        .map(response => {}).catch(this.handleError);
+ }
 
 }
