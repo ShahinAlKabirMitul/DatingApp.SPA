@@ -3,6 +3,8 @@ import { AlertifyService } from './../../_services/Alertfy.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../_services/user.service';
 import { AuthService } from '../../_services/auth.service';
+import * as _ from 'underscore';
+import 'rxjs/add/operator/do';
 
 @Component({
   selector: 'app-member-messages',
@@ -22,7 +24,17 @@ export class MemberMessagesComponent implements OnInit {
     this.loadMessages();
   }
   loadMessages() {
-    this.userService.getMessageThread(this.authService.decodeToken.nameid, this.userId).subscribe(messages => {
+    const currentUser = +this.authService.decodeToken.nameid;
+    this.userService.getMessageThread(this.authService.decodeToken.nameid, this.userId)
+    .do( messages => {
+      _.each(messages, (message: Message) => {
+          if (message.isRead === false && message.recipientId === currentUser)
+          {
+            this.userService.markAsRead(currentUser, message.id);
+          }
+      } );
+    } )
+    .subscribe(messages => {
       this.messages = messages;
     }, error => {
       this.alerttify.error(this.alerttify.error(error));
@@ -32,7 +44,6 @@ sendMessage() {
   this.newMessage.recipientId = this.userId;
   this.userService.sendMessage(this.authService.decodeToken.nameid, this.newMessage).subscribe(message => {
     this.messages.unshift(message);
-    debugger;
     this.newMessage.content = '';
   }, error => {
     this.alerttify.error(error);

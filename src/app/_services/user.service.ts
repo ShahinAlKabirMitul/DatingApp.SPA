@@ -115,9 +115,13 @@ private handleError( error: any ) {
     }).catch(this.handleError);
  }
  deleteMessage(id: number, userid: number)
+ // tslint:disable-next-line:one-line
  {
     return this.authHttp.post(this.baseUrl + 'users/' + userid + '/messages/' + id, {})
         .map(response => {}).catch(this.handleError);
+ }
+ markAsRead(userid: number, messageid: number) {
+  return this.authHttp.post(this.baseUrl + 'users/' + userid + '/messages/' + messageid + '/read', {}).subscribe();
  }
 
 }

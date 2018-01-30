@@ -7,7 +7,6 @@ import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { AuthService } from '../../_services/auth.service';
 // tslint:disable-next-line:import-spacing
 import  * as _ from 'underscore';
-import { error } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-photo-editor',
@@ -48,7 +47,7 @@ export class PhotoEditorComponent implements OnInit {
     } );
   }
 
-  deletePhoto(id: number){
+  deletePhoto(id: number) {
     this.alertify.confirm('Are you sure you want to delete this photo', () => {
       this.userUservice.deletePhoto(this.authService.decodeToken.nameid, id).subscribe( () => {
           this.photos.splice(_.findIndex(this.photos, {id: id}), 1);
