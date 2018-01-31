@@ -20,7 +20,7 @@ export class PhotoEditorComponent implements OnInit {
   hasBaseDropZoneOver = false;
   baseUrl = environment.apiUrl;
   currentMain: Photo;
-  constructor(private authService: AuthService, 
+  constructor(private authService: AuthService,
     private userUservice: UserService,
     private alertify: AlertifyService) { }
 

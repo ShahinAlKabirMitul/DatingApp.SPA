@@ -33,6 +33,8 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ButtonsModule } from 'ngx-bootstrap/buttons/buttons.module';
 import { MessagesResolver } from './_resolvers/message.resolver';
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,15 @@ import { MessagesResolver } from './_resolvers/message.resolver';
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:5000']
+      }
+    }),
 
   ],
   providers: [

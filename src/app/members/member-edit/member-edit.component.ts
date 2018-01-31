@@ -26,7 +26,6 @@ export class MemberEditComponent implements OnInit {
     this.authService.currentPhotoUrl.subscribe( p => this.photoUrl = p );
   }
   updateUser() {
-    console.log('Update User:', this.user);
     this.userService.updateUser(this.authService.decodeToken.nameid, this.user).subscribe( next => {
       this.alertify.success('Update Successfully');
       this.editForm.reset(this.user);
@@ -37,7 +36,6 @@ export class MemberEditComponent implements OnInit {
   }
   updateMainPhoto(photoUrl: string) {
     this.user.photoUrl = photoUrl;
-    
   }
 
 }
