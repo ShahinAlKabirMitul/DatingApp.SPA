@@ -52,8 +52,6 @@ constructor(private http: HttpClient, public jwtHelperService: JwtHelperService)
  loggedIn() {
     const token = this.jwtHelperService.tokenGetter();
     // tslint:disable-next-line:curly
-    console.log('loggedIn', token);
-    // tslint:disable-next-line:curly
     if (!token)
       return false;
     return !this.jwtHelperService.isTokenExpired(token);

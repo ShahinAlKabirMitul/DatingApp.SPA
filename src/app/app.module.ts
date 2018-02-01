@@ -26,7 +26,6 @@ import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './_guards/auth.guard';
 import { MemberCardComponent } from './members/member-card/member-card.component';
-import {  AuthModule } from './auth/auth.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
@@ -59,7 +58,6 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    AuthModule,
     TabsModule.forRoot(),
     NgxGalleryModule,
     FileUploadModule,
