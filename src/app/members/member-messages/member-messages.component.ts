@@ -29,6 +29,7 @@ export class MemberMessagesComponent implements OnInit {
     .do( messages => {
       _.each(messages, (message: Message) => {
           if (message.isRead === false && message.recipientId === currentUser)
+          // tslint:disable-next-line:one-line
           {
             this.userService.markAsRead(currentUser, message.id);
           }

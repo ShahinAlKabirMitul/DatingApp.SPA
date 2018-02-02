@@ -43,26 +43,25 @@ getUsers(page?, itemsPerPage?, userParams?: any , likesParam?: any) {
              }
              return paginatedResult;
            } )
-           .catch(this.handleError);
+           ;
 }
 
 getUser(id): Observable<User> {
-    return this.httpClient.get( this.baseUrl + 'users/' + id)
-    .catch(this.handleError);
+    return this.httpClient.get<User>( this.baseUrl + 'users/' + id);
 }
 
 updateUser(id: number, user: User) {
-    return this.httpClient.put(this.baseUrl + 'users/' + id, user).catch(this.handleError);
+    return this.httpClient.put(this.baseUrl + 'users/' + id, user);
 }
 setMainPhoto(userid: number, id: number) {
-    return this.httpClient.post(this.baseUrl + 'users/' + userid + '/photos/' + id + '/setMain', { }).catch(this.handleError);
+    return this.httpClient.post(this.baseUrl + 'users/' + userid + '/photos/' + id + '/setMain', { });
 }
 deletePhoto(userid: number, id: number) {
-    return this.httpClient.delete(this.baseUrl + 'users/' + userid + '/photos/' + id , { }).catch(this.handleError);
+    return this.httpClient.delete(this.baseUrl + 'users/' + userid + '/photos/' + id , { });
 }
 
 sendLike(id: number, recipientId: number) {
-    return this.httpClient.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {}).catch(this.handleError);
+    return this.httpClient.post(this.baseUrl + 'users/' + id + '/like/' + recipientId, {});
 }
 getMessages(id: number, page?, itemPerPage?, messageContainer?) {
     const paginatedResult: PaginatedResult<Message[]> = new PaginatedResult<Message[]>();
@@ -80,41 +79,18 @@ getMessages(id: number, page?, itemPerPage?, messageContainer?) {
                 paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
               }
               return paginatedResult;
-          } ).catch(this.handleError);
+          } );
 }
 getMessageThread(id: number, recipientId: number) {
-    return this.httpClient.get(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId)
-   .catch(this.handleError);
+    return this.httpClient.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipientId);
 }
-
-private handleError( error: any ) {
-    if ( error.status === 400) {
-        return Observable.throw(error._body);
-    }
-    const applicationError = error.headers.get('Application-Error');
-    if (applicationError) {
-        return Observable.throw(applicationError);
-    }
-    const serverError = error.json();
-    let modelStateError = '';
-    if (serverError) {
-        for (const key in serverError) {
-            if (serverError[key]) {
-                modelStateError += serverError[key] + '\n';
-            }
-        }
-    }
-    return Observable.throw(
-        modelStateError || 'Server Error '
-    );
- }
  sendMessage(id: number, message: Message) {
-    return this.httpClient.post(this.baseUrl + 'users/' + id + '/messages', message).catch(this.handleError);
+    return this.httpClient.post<Message>(this.baseUrl + 'users/' + id + '/messages', message);
  }
  deleteMessage(id: number, userid: number)
  // tslint:disable-next-line:one-line
  {
-    return this.httpClient.post(this.baseUrl + 'users/' + userid + '/messages/' + id, {}).catch(this.handleError);
+    return this.httpClient.post(this.baseUrl + 'users/' + userid + '/messages/' + id, {});
  }
  markAsRead(userid: number, messageid: number) {
   return this.httpClient.post(this.baseUrl + 'users/' + userid + '/messages/' + messageid + '/read', {}).subscribe();

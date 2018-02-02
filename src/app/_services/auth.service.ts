@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
@@ -14,7 +15,7 @@ import { debug } from 'util';
 @Injectable()
 export class AuthService {
 
-baseurl = ' http://localhost:5000/api/auth/';
+baseurl = environment.apiUrl;
 userToken: any;
 decodeToken: any;
 currentUser: User;
@@ -27,7 +28,7 @@ constructor(private http: HttpClient, public jwtHelperService: JwtHelperService)
 
  }
  login(model: any) {
-   return this.http.post<AuthUser> (this.baseurl + 'login', model, { headers: new HttpHeaders()
+   return this.http.post<AuthUser> (this.baseurl + 'auth/login', model, { headers: new HttpHeaders()
     .set('Content-Type', 'application/json') })
     .map( user => {
      if (user) {
@@ -46,7 +47,7 @@ constructor(private http: HttpClient, public jwtHelperService: JwtHelperService)
             this.changeMemberPhoto('../../assets/user.png');
         }
      }
-   } ).catch(this.handleError);
+   } );
  }
 
  loggedIn() {
@@ -58,30 +59,10 @@ constructor(private http: HttpClient, public jwtHelperService: JwtHelperService)
   }
 
  register(user: User) {
-   return this.http.post(this.baseurl + 'register', user, { headers: new HttpHeaders().
-    set('Content-Type', 'application/json') }).catch(this.handleError);
+   return this.http.post(this.baseurl + 'auth/register', user, { headers: new HttpHeaders().
+    set('Content-Type', 'application/json') });
  }
 
-
-
- private handleError( error: any ) {
-    const applicationError = error.headers.get('Application-Error');
-    if (applicationError) {
-        return Observable.throw(applicationError);
-    }
-    const serverError = error.json();
-    let modelStateError = '';
-    if (serverError) {
-        for (const key in serverError) {
-            if (serverError[key]) {
-                modelStateError += serverError[key] + '\n';
-            }
-        }
-    }
-    return Observable.throw(
-        modelStateError || 'Server Error '
-    );
- }
 
 }
 
